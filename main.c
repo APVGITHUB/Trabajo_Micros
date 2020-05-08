@@ -75,6 +75,6 @@ ISR(TIMER1_CAPT_vect){
 	tA = ICR1;
 	while(PINE &= 0X80){}
 	tB = ICR3;
-	ratio = (float)tA/tB;
+	ratio = (float)tB/tA;
 	coin_classifier(ratio);
 }
