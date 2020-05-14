@@ -7,26 +7,23 @@ void setup_optics(){
 	
 	//TIMER1 CONF PARA S01
 	DDRD &= ~(1<<DDD4); //PIND4 INPUT
-	//TCCR1A |= (1<<WGM12);//enable CTC mode
-	//TCCR1B |= (1<<WGM13);//with ICR1 interrupt
-	TCCR1B |= (1<<CS10); //prescalado 1
+	TCCR1B |= (1<<CS11); //prescalado 8
 	TCCR1B &= ~(1<<ICES1); //INPUT CAPTURE ICP1 associated to PD4, capture when falling edge
 	TIMSK1 |= (1<<ICIE1); //enable interrupt for TIMER1
 	TIFR1 = (1<<ICF1); //clear possible flag
 	
 	//TIMER3 CONF PARA S02
 	DDRE &= ~(1<<DDE7); //PINE7 INPUT
-	TCCR3B |= (1<<CS10); //prescalado 1
+	TCCR3B |= (1<<CS31); //prescalado 8
 	TCCR3B &= ~(1<<ICES3); //INPUT CAPTURE ICP3 associated to PE7, capture when falling edge
 	TIMSK3 |= (1<<ICIE3); //enable interrupt
 	TIFR3 = (1<<ICF3);  //clear possible flag
+	
 	
 	sei();
 }
 
 
-volatile uint16_t t1fall, t1rise, t2fall, t2rise, t3;
-float ratio;
 
 int8_t coin_classifier(float ratio){
 	if(ratio > EURO_MIN && ratio < EURO_MAX)
@@ -51,6 +48,13 @@ ISR(TIMER1_CAPT_vect){
 	{	
 		TCCR1B &= ~(1<<ICES1); //change to falling edge
 		t1rise = ICR1;
+		
+		if(t1rise < t1fall)//si hay ovf
+		{
+			t1 = (65535 - t1fall) + t1rise;
+			} else {
+			t1= t1rise - t1fall;
+		}
 	} else { //input capture by falling edge
 		TCCR1B |= (1<<ICES1); //change to rising edge
 		t1fall = ICR1;
@@ -63,10 +67,23 @@ ISR(TIMER3_CAPT_vect){
 	{	
 		TCCR3B &= ~(1<<ICES3); //change to falling edge
 		t2rise = ICR3;
-		ratio = (float)(t2fall - t2rise)/((t1fall - t1rise) - t3);
+		
+		if(t2rise < t2fall)//si hay ovf
+		{
+			t2 = (65535 - t2fall) + t2rise;
+		} else {
+			t2= t2rise - t2fall;
+		}	
+		if (t2fall<t1fall) //overflow
+		{
+			t3 = (65335 - t1fall) + t2fall;
+		} else {
+			t3 = (t2fall - t1fall); //se puede hacer en la funcion calcular 	
+		}
+		
+		//ratio = (float)(t2fall - t2rise)/((t1fall - t1rise) - t3);
 	} else { //input capture by falling edge
 		TCCR3B |= (1<<ICES3); //change to rising edge
 		t2fall = ICR3;
-		t3 = (t2fall - t1fall);
 	}
 }
