@@ -52,7 +52,7 @@ ISR(TIMER1_CAPT_vect){
 		if(t1rise < t1fall)//si hay ovf
 		{
 			t1 = (65535 - t1fall) + t1rise;
-			} else {
+		} else {
 			t1= t1rise - t1fall;
 		}
 	} else { //input capture by falling edge
