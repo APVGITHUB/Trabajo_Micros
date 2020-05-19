@@ -12,9 +12,9 @@
 
 
 
-// SE INCLUYE AL FINAL DE LA INTERRUPCI覰 DE SENSOR EM1 SIEMPRE QUE t1 Y t2 SEAN DISTINTAS DE CERO
+// SE INCLUYE AL FINAL DE LA INTERRUPCI脫N DE SENSOR EM1 SIEMPRE QUE t1 Y t2 SEAN DISTINTAS DE CERO
 	// PRIMERO SE CALCULAN t1, t2, t3 
-	// DESPU蒘 SE LLAMA A LA FUNCI覰 identificaMoneda()
+	// DESPU脡S SE LLAMA A LA FUNCI脫N identificaMoneda()
 
 // EN EL main()
 extern uint16_t deposito;
@@ -32,8 +32,9 @@ void sumarMoneda(uint8_t moneda)  {
 }
 
 uint16_t calculateRatio() {
-	float ratio;
-	ratio = (float)(t2/(t1 - t3));
+	/*
+	calcular aqui el ratio con decimales pero devolverlo como un entero multiplicado por 1000
+	*/
 	return ratio;
 }
 
@@ -43,7 +44,7 @@ void identificaMoneda () {
 	//r = t2 / (t1 - t3);
 	//r = calculateRatio();
 		
-	// validaci髇 moneda de 10 cent
+	// validaci贸n moneda de 10 cent
 	if ((r > min_ratio_10 && max_ratio_10 > r) && (f > min_freq_10 && max_freq_10 > f))
 	{
 		estado = VALIDA;
@@ -51,7 +52,7 @@ void identificaMoneda () {
 	}
 	else
 	{
-		// validaci髇 moneda de 20 cent
+		// validaci贸n moneda de 20 cent
 		if ((r > min_ratio_20 && max_ratio_20 > r) && (f > min_freq_20 && max_freq_20 > f))
 		{
 			estado = VALIDA;
@@ -59,7 +60,7 @@ void identificaMoneda () {
 		}
 		else
 		{
-			// validaci髇 moneda de 50 cent
+			// validaci贸n moneda de 50 cent
 			if ((r > min_ratio_50 && max_ratio_50 > r) && (f > min_freq_50 && max_freq_50 > f))
 			{
 				estado = VALIDA;
@@ -67,7 +68,7 @@ void identificaMoneda () {
 			}
 			else
 			{
-				// validaci髇 moneda de 100 cent
+				// validaci贸n moneda de 100 cent
 				if ((r > min_ratio_100 && max_ratio_100 > r) && (f > min_freq_100 && max_freq_100 > f))
 				{
 					estado = VALIDA;
