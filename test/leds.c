@@ -59,6 +59,7 @@ ISR (TIMER1_COMPB_vect) {
 			ledVerde_OFF();
 			ledRojo_OFF();
 			contLed = 0;
+			tiempoParpadeo = PARPADEO_OFF;
 			entraMoneda = 0;
 		}
 	}

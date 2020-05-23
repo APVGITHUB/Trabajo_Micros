@@ -46,7 +46,7 @@
  ISR (TIMER5_COMPA_vect) {
 	 if (j < rep) 
 	 {			
-		if (contPitido < tiempoBuzzer)
+		if (contPitido < (tiempoBuzzer - 1))
 		{
 			contPitido++;
 		}
