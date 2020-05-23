@@ -1,11 +1,9 @@
 /*
  * monedero.c
  *
- * Created: 5/6/2020 1:20:57 PM
- * Author : alexp
+ * Created: 09/05/2020 19:05:43
+ * Author : Guille
  */ 
-
-
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
@@ -15,8 +13,8 @@
 #include "display.h"
 #include "buzzer.h"
 #include "almacenar.h"
-#include "identificarMoneda.h"
 #include "sensores.h"
+
 void setup(){
 	cli();
 	
@@ -24,7 +22,8 @@ void setup(){
 	setupDisplay();
 	setupCompuerta();
 	setupBuzzer();
-	setup_optics();		//activar el preescalado al final
+	setupOpticos();		
+	//setupComm();
 	
 	sei();
 }
@@ -35,36 +34,25 @@ uint16_t deposito = 0;
 int main(void)
 {
     setup();
+	//deposito = recivedata();
     while (1) 
     {
-		while(frequency > 1800)
-		{
-			//LED ROJO PARPADEA CADA 3 SEG
-		}
- 		if ((cross_so1 == 1) && (cross_so2 == 1) && (frequency < 1800))
-		{	
-			flag ++; //flag = 2;
-			while (flag == 2)
-			{
-					
-			}
-			identificaMoneda();
-			switch(estado) {
-				case VALIDA:
+		switch(estado) {
+			case VALIDA:
 				ledVerde_ON();
 				pitidos(1);
 				estado = VACIO;
 				break;
 				
-				case NO_VALIDA:
+			case NO_VALIDA:
 				ledRojo_ON();
 				pitidos(3);
 				estado = VACIO;
+				break;	
+						
+			default:
 				break;
-				
-				default:
-				break;
-			}
 		}
+	//sendata(deposito);
     }
 }

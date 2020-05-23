@@ -28,16 +28,9 @@ void cerrarCompuerta() {
 	clrBit(COMPUERTA, E1);
 }
 
-//a√±adir en el archivo de IDENTIFICARMONEDA
-/*
-void actualizar (uint8_t moneda) {
-	deposito += moneda;
-}
-*/
 
-
-// DEBEN INCLUIRSE ESTAS DOS FUNCIONES A CONTINUACI√ìN DE identificaMoneda()
-void almacenar(int8_t estado) {	// RECIBE EL ESTADO DE LA M√ÅQUINA
+// DEBEN INCLUIRSE ESTAS DOS FUNCIONES A CONTINUACI”N DE identificaMoneda()
+void almacenar(int8_t estado) {	// RECIBE EL ESTADO DE LA M¡QUINA
 	if(estado)
 		abrirCompuerta();
 		OCR1A = TCNT1 + 1000;

@@ -52,14 +52,14 @@
 		}
 		else 
 		{
-			if(getBit(TCCR5A, COM5B1)) //SI EST√Å SONANDO
+			if(getBit(TCCR5A, COM5B1)) //SI EST¡ SONANDO
 			{
 				clrBit(TCCR5A, COM5B1);	// silencio
 				contPitido = 0;
 				tiempoBuzzer = SILENCIO;
 				j++;
 			}
-			else  //SI EST√Å EN SILENCIO
+			else  //SI EST¡ EN SILENCIO
 			{
 				setBit(TCCR5A, COM5B1);	//sonido
 				contPitido = 0;

@@ -9,27 +9,51 @@
 #ifndef COIN_SIZE_H_
 #define COIN_SIZE_H_
 
+#define FILTRO		1
 
-#define EURO_MIN 1.0
-#define EURO_MAX 1.1
+// INTERVALOS DE RATIO
 
-#define FIFTY_CENT_MIN 1.15
-#define FIFTY_CENT_MAX 1.25
+#define max_ratio_10	4.31
+#define min_ratio_10	3.81
 
-#define TWENTY_CENT_MIN 0.85
-#define TWENTY_CENT_MAX 0.95
+#define max_ratio_20	2.90
+#define min_ratio_20	2.77
 
-#define TEN_CENT_MIN 0.65
-#define TEN_CENT_MAX 0.75
+#define max_ratio_50	2.64
+#define min_ratio_50	2.55
 
-void setup_optics();
+#define max_ratio_100	2.47
+#define min_ratio_100	2.39
 
-volatile uint16_t t1fall, t1rise, t2fall, t2rise, t1, t2, t3;
-volatile uint16_t t_1;
-volatile uint16_t t_2;
-volatile float period; 
-volatile long frequency;
-volatile uint8_t cross_so1, cross_so2;
-//capture Flag
-volatile uint8_t flag;
+// INTERVALOS DE FRECUENCIAS
+
+#define max_freq_10		1598
+#define min_freq_10		1404
+
+#define max_freq_20		1070
+#define min_freq_20		901
+
+#define max_freq_50		546
+#define min_freq_50		460
+
+#define max_freq_100	418
+#define min_freq_100	385
+
+// ESTADOS POSIBLES EN LA MÁQUINA
+
+#define VALIDA 1
+#define NO_VALIDA -1
+#define VACIO	0
+
+// VALORES POSIBLES DE LAS MONEDAS
+
+#define DIEZ		1
+#define VEINTE		2
+#define	CINCUENTA	5
+#define EURO		10
+
+
+void setupOpticos();
+
+
 #endif /* COIN_SIZE_H_ */
