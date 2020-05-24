@@ -13,31 +13,31 @@
 
 // INTERVALOS DE RATIO
 
-#define MAX_RATIO_10	4.31
-#define MIN_RATIO_10	3.81
+#define MAX_RATIO_10	4.32
+#define MIN_RATIO_10	3.82
 
-#define MAX_RATIO_20	2.90
-#define MIN_RATIO_20	2.77
+#define MAX_RATIO_20	2.91
+#define MIN_RATIO_20	2.78
 
-#define MAX_RATIO_50	2.64
-#define MIN_RATIO_50	2.55
+#define MAX_RATIO_50	2.48
+#define MIN_RATIO_50	2.40
 
-#define MAX_RATIO_100	2.47
-#define MIN_RATIO_100	2.39
+#define MAX_RATIO_100	2.67
+#define MIN_RATIO_100	2.56
 
 // INTERVALOS DE FRECUENCIAS
 
-#define MAX_FREQ_10		1598
-#define MIN_FREQ_10		1404
+#define MAX_FREQ_10		1600
+#define MIN_FREQ_10		1400
 
-#define MAX_FREQ_20		1070
-#define MIN_FREQ_20		901
+#define MAX_FREQ_20		1075
+#define MIN_FREQ_20		900
 
-#define MAX_FREQ_50		546
-#define MIN_FREQ_50		460
+#define MAX_FREQ_50		420
+#define MIN_FREQ_50		380
 
-#define MAX_FREQ_100	418
-#define MIN_FREQ_100	385
+#define MAX_FREQ_100	550
+#define MIN_FREQ_100	450
 
 // ESTADOS POSIBLES EN LA MÁQUINA
 
