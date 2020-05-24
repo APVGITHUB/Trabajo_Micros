@@ -72,22 +72,22 @@ void sumarMoneda(uint8_t moneda)  {
 }
 
 void identificaMoneda () {
-	if ((r > min_ratio_10 && max_ratio_10 > r) && (f > min_freq_10 && max_freq_10 > f))
+	if ((r > MIN_RATIO_10 && MAX_RATIO_10 > r) && (f > MIN_FREQ_10 && MAX_FREQ_10 > f))	//validación monedaa de 10 cent
 	{
 		estado = VALIDA;
 		sumarMoneda(DIEZ);
 	}
-	else if ((r > min_ratio_20 && max_ratio_20 > r) && (f > min_freq_20 && max_freq_20 > f)) // validación moneda de 20 cent
+	else if ((r > MIN_RATIO_20 && MAX_RATIO_20 > r) && (f > MIN_FREQ_20 && MAX_FREQ_20 > f)) // validación moneda de 20 cent
 	{
 		estado = VALIDA;
 		sumarMoneda(VEINTE);
 	}
-	else if ((r > min_ratio_50 && max_ratio_50 > r) && (f > min_freq_50 && max_freq_50 > f)) // validación moneda de 50 cent
+	else if ((r > MIN_RATIO_50 && MAX_RATIO_50 > r) && (f > MIN_FREQ_50 && MAX_FREQ_50 > f)) // validación moneda de 50 cent
 	{
 		estado = VALIDA;
 		sumarMoneda(CINCUENTA);
 	}
-	else if ((r > min_ratio_100 && max_ratio_100 > r) && (f > min_freq_100 && max_freq_100 > f)) // validación moneda de 100 cent
+	else if ((r > MIN_RATIO_100 && MAX_RATIO_100 > r) && (f > MIN_FREQ_100 && MAX_FREQ_100 > f)) // validación moneda de 100 cent
 	{
 		estado = VALIDA;
 		sumarMoneda(EURO);

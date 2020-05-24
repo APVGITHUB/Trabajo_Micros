@@ -27,6 +27,7 @@ void setup(){
 int8_t estado = VACIO;
 uint16_t deposito = 0;
 
+
 int main(void)
 {
 	setup();
@@ -49,8 +50,11 @@ int main(void)
 			default:
 			break;
 		}
+		
 		char total[4];
 		sprintf(total,"%04d",deposito);
+		int confirmar = 0;
+		confirmar = atoi(total);
 		sendMoney(total);
 	}
 }

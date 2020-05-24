@@ -9,9 +9,9 @@
 #ifndef ALMACENAR_H_
 #define ALMACENAR_H_
 
-#define COMPUERTA_SETUP	DDRB
-#define COMPUERTA		PORTB		
-#define E1				4
+#define COMPUERTA_SETUP	DDRD
+#define COMPUERTA		PORTD		
+#define E1				0
 
 #define TIEMPO_ABIERTA 500	// tiempo que dura abierta la compuerta en ms
 

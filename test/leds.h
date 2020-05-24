@@ -9,8 +9,8 @@
 #ifndef LEDS_H_
 #define LEDS_H_
 
-#define LEDS_SETUP	DDRC
-#define LEDS		PORTC
+#define LEDS_SETUP	DDRA
+#define LEDS		PORTA
 #define VERDE		0
 #define ROJO		1
 

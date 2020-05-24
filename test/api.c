@@ -7,11 +7,23 @@
 #include <avr/io.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include "bit_utils.h"
 #include "api.h"
 
+
+
+void delay(int ms){
+	for(int i=0; i<ms; i++){
+		for(volatile int j= 0; j<444; j++);
+	}
+}
+
+
 void setupComm()
 {
+	delay(50);
+	/*
 	//CONF USART en modo asincrono
 	clrBit(UCSR0C,UMSEL00);
 	clrBit(UCSR0C,UMSEL01);
@@ -26,29 +38,37 @@ void setupComm()
 	
 	setBit(UCSR0B,TXEN0); //enable transmision comm
 	setBit(UCSR0B,RXEN0);//enable reception comm
+	*/
 }
+
+
+
 
 void sendMoney(char * total[])
 {
-
+		/*
 		for(volatile int i =0 ; i<strlen(*total) ; i++)
 		{
 			while ( !(getBit(UCSR0A,UDRE0)) ); //esperar a que el buffer de transmision este vacio
 			
 			UDR0 = *total[i]; //cargo el buffer con el dato
 		}
+		*/
+		delay(50);
 }
 
 char * receiveData()
 {	
 	char * data = malloc(sizeof(char)*4);
-	
+	/*
 	for(volatile int i =0 ; i < 4 ; i++)
 	{
 		while ( !(getBit(UCSR0A,RXC0)) ); //esperar a que el buffer de transmision este vacio
 		
 		*(data + i) = UDR0;
 	}
-	
+	*/
+	sprintf(data,"1234");
+	delay(50);
 	return data;
 }
