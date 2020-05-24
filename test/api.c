@@ -47,7 +47,7 @@ char * receiveData()
 	{
 		while ( !(getBit(UCSR0A,RXC0)) ); //esperar a que el buffer de transmision este vacio
 		
-		data[i] = UDR0; //cargo el buffer con el dato
+		data[i] = UDR0; 
 	}
 	
 	return data;
