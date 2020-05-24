@@ -1,12 +1,7 @@
-/*
- * monedero.c
- *
- * Created: 09/05/2020 19:05:43
- * Author : Guille
- */ 
-
 #include <avr/io.h>
 #include <avr/interrupt.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 #include "bit_utils.h"
 #include "leds.h"
@@ -14,6 +9,7 @@
 #include "buzzer.h"
 #include "almacenar.h"
 #include "sensores.h"
+#include "api.h"
 
 void setup(){
 	cli();
@@ -22,8 +18,8 @@ void setup(){
 	setupDisplay();
 	setupCompuerta();
 	setupBuzzer();
-	setupOpticos();		
-	//setupComm();
+	setupOpticos();
+	setupComm();
 	
 	sei();
 }
@@ -33,26 +29,28 @@ uint16_t deposito = 0;
 
 int main(void)
 {
-    setup();
-	//deposito = recivedata();
-    while (1) 
-    {
+	setup();
+	deposito = atoi(receiveData());
+	while (1)
+	{
 		switch(estado) {
 			case VALIDA:
-				ledVerde_ON();
-				pitidos(1);
-				estado = VACIO;
-				break;
-				
+			ledVerde_ON();
+			pitidos(1);
+			estado = VACIO;
+			break;
+			
 			case NO_VALIDA:
-				ledRojo_ON();
-				pitidos(3);
-				estado = VACIO;
-				break;	
-						
+			ledRojo_ON();
+			pitidos(3);
+			estado = VACIO;
+			break;
+			
 			default:
-				break;
+			break;
 		}
-	//sendata(deposito);
-    }
+		char total[4];
+		sprintf(total,"%04d",deposito);
+		sendMoney(total);
+	}
 }
