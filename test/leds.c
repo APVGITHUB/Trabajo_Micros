@@ -1,10 +1,3 @@
-/*
- * leds.c
- *
- * Created: 18/05/2020 0:46:17
- *  Author: Guille
- */ 
-
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include "bit_utils.h"
@@ -12,11 +5,11 @@
 
 void setupLeds() {
 	
-	setBit(LEDS_SETUP,VERDE);
-	setBit(LEDS_SETUP,ROJO);
-	clrBit(LEDS,VERDE);	
-	clrBit(LEDS,ROJO);
-	
+	setBit(LEDS_SETUP,VERDE);	// establece led verde como salida
+	setBit(LEDS_SETUP,ROJO);	// establece led rojo como salida
+	clrBit(LEDS,VERDE);		// inicio led verde apagado
+	clrBit(LEDS,ROJO);		// inicio led rojo apagado
+		
 	setBit(TIMSK1, OCIE1B);
 	OCR1B = 1000;	// interrupcion cada ms
 	
@@ -24,7 +17,7 @@ void setupLeds() {
 
 uint16_t contLed = 0;
 uint16_t tiempoParpadeo = PARPADEO_OFF;
-uint8_t entraMoneda = 0;
+uint8_t entraMoneda = 0;	// bandera que indica cuando ha entrado una moneda
 
 
 void ledVerde_ON (){
@@ -70,11 +63,17 @@ ISR (TIMER1_COMPB_vect) {
 			contLed++;
 		else 
 		{
-			toggleBit(LEDS, ROJO);
-			if(tiempoParpadeo == PARPADEO_ON)
-			tiempoParpadeo = PARPADEO_OFF;
-			else
-			tiempoParpadeo = PARPADEO_ON;
+			if(getBit(LEDS, ROJO))
+			{
+				clrBit(LEDS, ROJO);
+				tiempoParpadeo = PARPADEO_OFF;
+			}
+			else 
+			{
+				setBit(LEDS, ROJO);
+				tiempoParpadeo = PARPADEO_ON;
+			}
+			
 			contLed = 0;
 		}
 	}
