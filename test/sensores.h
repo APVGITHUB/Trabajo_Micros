@@ -1,15 +1,7 @@
-/*
- * coin_size.h
- *
- * Created: 5/8/2020 10:55:38 AM
- *  Author: alexp
- */ 
-
-
 #ifndef COIN_SIZE_H_
 #define COIN_SIZE_H_
 
-#define FILTRO		1
+#define FILTRO		1   // NUMERO DE PERIODOS A FILTRAR
 
 // INTERVALOS DE RATIO
 
@@ -39,7 +31,7 @@
 #define MAX_FREQ_100	550
 #define MIN_FREQ_100	450
 
-// ESTADOS POSIBLES EN LA M¡QUINA
+// ESTADOS POSIBLES EN LA M√ÅQUINA
 
 #define VALIDA 1
 #define NO_VALIDA -1
@@ -53,7 +45,7 @@
 #define EURO		10
 
 
-void setupOpticos();
+void setupSensores();
 
 
 #endif /* COIN_SIZE_H_ */
