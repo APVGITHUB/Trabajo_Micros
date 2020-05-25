@@ -1,9 +1,3 @@
-/*
- * CFile1.c
- *
- * Created: 5/24/2020 12:21:08 PM
- *  Author: alexp
- */ 
 #include <avr/io.h>
 #include <string.h>
 #include <stdlib.h>
@@ -12,7 +6,7 @@
 #include "api.h"
 
 
-
+// BLOQUEO SOFTWARE
 void delay(int ms){
 	for(int p=0; p<ms; p++){
 		for(volatile int q= 0; q<444; q++);
