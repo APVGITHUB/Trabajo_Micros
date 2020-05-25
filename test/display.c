@@ -30,8 +30,7 @@ void select () {
 	
 	// bit 1 de display
 	b1 = display/2;
-	b1 %= 2
-	;
+	b1 %= 2;
 	if(b1)
 	setBit(SELECTOR, SEL1);
 	else
