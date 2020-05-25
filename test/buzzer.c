@@ -1,10 +1,3 @@
-/*
- * buzzer.c
- *
- * Created: 18/05/2020 14:27:41
- *  Author: Guille
- */ 
-
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include "bit_utils.h"
@@ -22,23 +15,22 @@
 	 setBit(TCCR5A, WGM50);  
 	 
 	 OCR5A = (PERIODO - 1);				// periodo del PWM
-	 OCR5B = DUTY_CYCLE*(PERIODO - 1);
+	 OCR5B = DUTY_CYCLE*(PERIODO - 1);		// duty cycle del PWM
 	 setBit(TCCR5B, CS51);		// preescalado de 8
 	 
  }
  
  
  uint8_t j = 0;
- uint8_t rep = 0;	//numero de repeticiones del pitido
+ uint8_t rep = 0;	
  uint16_t contPitido = 0;
  uint16_t tiempoBuzzer = SILENCIO;
  
  
  void pitidos(uint8_t n) {
-	// Set en BOTTOM // Clear en OCRB (duty cycle PWM)
-	setBit(TCCR5A, COM5B1);	
+	setBit(TCCR5A, COM5B1);	// Set en BOTTOM, Clear en OCRB 
 	tiempoBuzzer = SONIDO;
-	rep = n;
+	rep = n;	//numero de repeticiones del pitido
 	setBit(TIMSK5, OCIE5A);	// activar interrupcion por OCRA 
  }
  
@@ -52,14 +44,14 @@
 		}
 		else 
 		{
-			if(getBit(TCCR5A, COM5B1)) //SI EST¡ SONANDO
+			if(getBit(TCCR5A, COM5B1)) //SI EST√Å SONANDO
 			{
 				clrBit(TCCR5A, COM5B1);	// silencio
 				contPitido = 0;
 				tiempoBuzzer = SILENCIO;
 				j++;
 			}
-			else  //SI EST¡ EN SILENCIO
+			else  //SI EST√Å EN SILENCIO
 			{
 				setBit(TCCR5A, COM5B1);	//sonido
 				contPitido = 0;
@@ -69,6 +61,7 @@
 	}
 	else
 	{
+		j = 0;
 		clrBit(TIMSK5, OCIE5A);	// desactivar interrupcion por OCRA 
 	}		
  }
