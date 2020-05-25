@@ -1,11 +1,3 @@
-/*
- * almacenar.h
- *
- * Created: 17/05/2020 23:59:52
- *  Author: Guille
- */ 
-
-
 #ifndef ALMACENAR_H_
 #define ALMACENAR_H_
 
