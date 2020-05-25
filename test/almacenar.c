@@ -1,10 +1,3 @@
-/*
- * almacenar.c
- *
- * Created: 18/05/2020 0:00:05
- *  Author: Guille
- */ 
-
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include "bit_utils.h"
@@ -12,7 +5,7 @@
 
 void setupCompuerta() {
 	
-	setBit(COMPUERTA_SETUP, E1);	//se establece como salida
+	setBit(COMPUERTA_SETUP, E1);	//se establece la compuerta como salida
 	clrBit(COMPUERTA, E1);			//inicio cerrada
 
 }
@@ -28,14 +21,13 @@ void cerrarCompuerta() {
 	clrBit(COMPUERTA, E1);
 }
 
-
-// DEBEN INCLUIRSE ESTAS DOS FUNCIONES A CONTINUACI”N DE identificaMoneda()
-void almacenar(int8_t estado) {	// RECIBE EL ESTADO DE LA M¡QUINA
+//ABRIR LA COMPUERTA SI LA MONEDA ES V√ÅLIDA
+void almacenar(int8_t estado) {	
 	if(estado)
 		abrirCompuerta();
-		OCR1A = TCNT1 + 1000;
+		OCR1A = TCNT1 + 1000;	//	programar interrupcion 1ms despu√©s de abrir compuerta
 		setBit(TIMSK1, OCIE1A);	//	desenmascarar interrupciones por OCR1A	
-		contCompuerta = 0;	// reinicia el tiempo abierta la compuerta en caso de que entre otra moneda mientras la compuerta sigue abierta	
+		contCompuerta = 0;		
 }
 
 
