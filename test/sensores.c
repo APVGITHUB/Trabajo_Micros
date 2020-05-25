@@ -1,4 +1,3 @@
-
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include "bit_utils.h"
@@ -7,31 +6,31 @@
 
 
 
-void setupOpticos(){
+void setupSensores(){
 	
-	clrBit(DDRD,DDD4);  //PIND4 INPUT
-	clrBit(DDRE,DDE7); //PINE7 INPUT
-	clrBit(DDRL,DDL0);	//PINL0 INPUT
+	clrBit(DDRD,DDD4);  //PIND4 INPUT CAPTURE TIMER 1
+	clrBit(DDRE,DDE7); //PINE7 INPUT CAPTURE TIMER 3
+	clrBit(DDRL,DDL0);	//PINL0 INPUT INPUT CAPTURE TIMER 4
 	
 	//TIMER1 CONF PARA S01
 	clrBit(TCCR1B,ICES1); //INPUT CAPTURE ICP1 associated to PD4, capture when falling edge
-	setBit(TIMSK1,ICIE1); //enable interrupt for TIMER1
+	setBit(TIMSK1,ICIE1); //enable interrupt input capture
 	TIFR1 = (1<<ICF1); //clear possible flag
 	setBit(TCCR1B,CS11); //prescalado 8
 	
 	
 	//TIMER3 CONF PARA S02
 	clrBit(TCCR3B,ICES3); //INPUT CAPTURE ICP3 associated to PE7, capture when falling edge
-	setBit(TIMSK3,ICIE3);//enable interrupt
+	setBit(TIMSK3,ICIE3);//enable interrupt input capture
 	TIFR3 = (1<<ICF3);  //clear possible flag
 	setBit(TCCR3B,CS31);//prescalado 8
 	
 	
 	//TIMER4 CONF PARA EM1
 	setBit(TCCR4B,ICES4); //Input capture on RISING edge
-	setBit(TIMSK4,ICIE4);	//enable interrupt
+	setBit(TIMSK4,ICIE4);	//enable interrupt input capture
 	TIFR4 = (1<<ICF4);	//clear possible flag
-	setBit(TCCR4B,CS41); // timer 1 setup with a pre-scalar of 8
+	setBit(TCCR4B,CS41); // prescalado 8
 
 }
 
@@ -47,7 +46,6 @@ long f_actual = 0;
 uint8_t i = 0;
 
 
-// EN EL main()
 extern uint16_t deposito;
 extern int8_t estado;
 
@@ -72,22 +70,22 @@ void sumarMoneda(uint8_t moneda)  {
 }
 
 void identificaMoneda () {
-	if ((r > MIN_RATIO_10 && MAX_RATIO_10 > r) && (f > MIN_FREQ_10 && MAX_FREQ_10 > f))	//validaci髇 monedaa de 10 cent
+	if ((r > MIN_RATIO_10 && MAX_RATIO_10 > r) && (f > MIN_FREQ_10 && MAX_FREQ_10 > f))	//validaci贸n monedaa de 10 cent
 	{
 		estado = VALIDA;
 		sumarMoneda(DIEZ);
 	}
-	else if ((r > MIN_RATIO_20 && MAX_RATIO_20 > r) && (f > MIN_FREQ_20 && MAX_FREQ_20 > f)) // validaci髇 moneda de 20 cent
+	else if ((r > MIN_RATIO_20 && MAX_RATIO_20 > r) && (f > MIN_FREQ_20 && MAX_FREQ_20 > f)) // validaci贸n moneda de 20 cent
 	{
 		estado = VALIDA;
 		sumarMoneda(VEINTE);
 	}
-	else if ((r > MIN_RATIO_50 && MAX_RATIO_50 > r) && (f > MIN_FREQ_50 && MAX_FREQ_50 > f)) // validaci髇 moneda de 50 cent
+	else if ((r > MIN_RATIO_50 && MAX_RATIO_50 > r) && (f > MIN_FREQ_50 && MAX_FREQ_50 > f)) // validaci贸n moneda de 50 cent
 	{
 		estado = VALIDA;
 		sumarMoneda(CINCUENTA);
 	}
-	else if ((r > MIN_RATIO_100 && MAX_RATIO_100 > r) && (f > MIN_FREQ_100 && MAX_FREQ_100 > f)) // validaci髇 moneda de 100 cent
+	else if ((r > MIN_RATIO_100 && MAX_RATIO_100 > r) && (f > MIN_FREQ_100 && MAX_FREQ_100 > f)) // validaci贸n moneda de 100 cent
 	{
 		estado = VALIDA;
 		sumarMoneda(EURO);
@@ -141,7 +139,7 @@ ISR(TIMER4_CAPT_vect){
 		f = f_actual;
 	}
 	
-	if((t2 != 0) && (f != 0))	//ha pasado por los sensores 髉ticos y por el electromagn閠ico
+	if((t2 != 0) && (f != 0))	//ha pasado por los sensores 贸pticos y por el electromagn茅tico
 	{
 		calculateRatio();
 		identificaMoneda();
