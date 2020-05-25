@@ -1,11 +1,3 @@
-/*
- * leds.h
- *
- * Created: 18/05/2020 0:47:51
- *  Author: Guille
- */ 
-
-
 #ifndef LEDS_H_
 #define LEDS_H_
 
@@ -14,10 +6,10 @@
 #define VERDE		0
 #define ROJO		1
 
-#define TIEMPO_ON	2000 // tiempo que permanece el led encendido en ms
+#define TIEMPO_ON	2000 // tiempo que permanece el led encendido cuando entra moneda en ms
 
-#define PARPADEO_ON		500
-#define PARPADEO_OFF	3000
+#define PARPADEO_ON		500   // tiempo de encendido en el parpadeo en ms
+#define PARPADEO_OFF	3000    // tiempo de apagado en el parpadeo en ms
 
 
 
