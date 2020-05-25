@@ -1,10 +1,3 @@
-/*
- * display.c
- *
- * Created: 18/05/2020 1:43:05
- *  Author: Guille
- */ 
-
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include "bit_utils.h"
@@ -12,11 +5,11 @@
 
 void setupDisplay() {
 	
-	setBit(SELECTOR_SETUP, SEL0);
-	setBit(SELECTOR_SETUP, SEL1);
-	SEGMENTOS_SETUP = 0b01111111;
+	setBit(SELECTOR_SETUP, SEL0);	// Establece SEL0 como salida
+	setBit(SELECTOR_SETUP, SEL1);	// Establece SEL1 como salida
+	SEGMENTOS_SETUP = 0b01111111;	// Establece segmentos como salida
 	setBit(TIMSK1, OCIE1C);
-	OCR1C = REFRESCO; // FRECUENCIA DE REFRESCO DEL SELECTOR DE 4kHz
+	OCR1C = REFRESCO; // FRECUENCIA DE REFRESCO DEL SELECTOR 
 	
 }
 
@@ -86,14 +79,15 @@ void segment () {
 
 ISR(TIMER1_COMPC_vect) {
 	OCR1C += REFRESCO;
-	select();	// selector
+	select();	
 	
+	// coger cifra correspondiente al selector en este instante
 	num = deposito;
 	for(volatile int k=0; k<display; k++) {
 		num /= 10;
 	}
 	num %= 10;
-	segment();	// segmentos
+	segment();	
 	
 	// cambiar el selector
 	if (display < 3)
