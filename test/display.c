@@ -89,7 +89,7 @@ ISR(TIMER1_COMPC_vect) {
 	select();	// selector
 	
 	num = deposito;
-	for(volatile int i=0; i<display; i++) {
+	for(volatile int k=0; k<display; k++) {
 		num /= 10;
 	}
 	num %= 10;
