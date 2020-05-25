@@ -14,18 +14,18 @@
 void setup(){
 	cli();
 	
+	setupComm();
 	setupLeds();
 	setupDisplay();
 	setupCompuerta();
 	setupBuzzer();
-	setupOpticos();
-	setupComm();
+	setupSensores();	
 	
 	sei();
 }
 
-int8_t estado = VACIO;
-uint16_t deposito = 0;
+int8_t estado = VACIO;	// estado de la moneda, se inicia en VACIO, no ha entrado moneda
+uint16_t deposito = 0;	// indica el dinero almacenado tal como se mostrará en los display
 
 
 int main(void)
