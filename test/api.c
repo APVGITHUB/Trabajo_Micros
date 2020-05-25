@@ -14,8 +14,8 @@
 
 
 void delay(int ms){
-	for(int i=0; i<ms; i++){
-		for(volatile int j= 0; j<444; j++);
+	for(int p=0; p<ms; p++){
+		for(volatile int q= 0; q<444; q++);
 	}
 }
 
