@@ -17,21 +17,20 @@ void setupLeds() {
 
 uint16_t contLed = 0;
 uint16_t tiempoParpadeo = PARPADEO_OFF;
-uint8_t entraMoneda = 0;	// bandera que indica cuando ha entrado una moneda
-
+extern uint8_t actuando_led;
 
 void ledVerde_ON (){
 	setBit(LEDS, VERDE);
 	OCR1B = TCNT1 + 1000;
-	entraMoneda = 1;
-	contLed = 0;
+	actuando_led = 1;
+	contLed = 0;	
 }
 
 void ledRojo_ON (){
 	setBit(LEDS, ROJO);
 	OCR1B = TCNT1 + 1000;
-	entraMoneda = 1;
-	contLed = 0;	
+	actuando_led = 1;
+	contLed = 0;		
 }
 
 void ledVerde_OFF (){
@@ -45,7 +44,7 @@ void ledRojo_OFF (){
 
 ISR (TIMER1_COMPB_vect) {
 	OCR1B += 1000;
-	if(entraMoneda) {
+	if(actuando_led) {
 		if (contLed < (TIEMPO_ON - 1))
 			contLed++;
 		else {
@@ -53,7 +52,7 @@ ISR (TIMER1_COMPB_vect) {
 			ledRojo_OFF();
 			contLed = 0;
 			tiempoParpadeo = PARPADEO_OFF;
-			entraMoneda = 0;
+			actuando_led = 0;
 		}
 	}
 	
