@@ -25,12 +25,13 @@
  uint8_t rep = 0;	
  uint16_t contPitido = 0;
  uint16_t tiempoBuzzer = SILENCIO;
- 
+ extern uint8_t actuando_buzzer;
  
  void pitidos(uint8_t n) {
 	setBit(TCCR5A, COM5B1);	// Set en BOTTOM, Clear en OCRB 
 	tiempoBuzzer = SONIDO;
 	rep = n;	//numero de repeticiones del pitido
+	actuando_buzzer = 1;
 	setBit(TIMSK5, OCIE5A);	// activar interrupcion por OCRA 
  }
  
@@ -62,6 +63,7 @@
 	else
 	{
 		j = 0;
+		actuando_buzzer = 0;
 		clrBit(TIMSK5, OCIE5A);	// desactivar interrupcion por OCRA 
 	}		
  }
