@@ -27,6 +27,9 @@ void setup(){
 int8_t estado = VACIO;	// estado de la moneda, se inicia en VACIO, no ha entrado moneda
 uint16_t deposito = 0;	// indica el dinero almacenado tal como se mostrará en los display
 
+uint8_t actuando_led = 0;	// bandera que indica si el led sigue activo
+uint8_t actuando_buzzer = 0;	// bandera que indica si el buzzer sigue activo
+
 
 int main(void)
 {
@@ -34,23 +37,26 @@ int main(void)
 	deposito = atoi(receiveData());
 	while (1)
 	{
-		switch(estado) {
-			case VALIDA:
-			ledVerde_ON();
-			pitidos(1);
-			estado = VACIO;
-			break;
-			
-			case NO_VALIDA:
-			ledRojo_ON();
-			pitidos(3);
-			estado = VACIO;
-			break;
-			
-			default:
-			break;
+		if(actuando_led | actuando_buzzer);
+		else
+		{
+			switch(estado) {
+				case VALIDA:
+				ledVerde_ON();
+				pitidos(1);
+				estado = VACIO;
+				break;
+
+				case NO_VALIDA:
+				ledRojo_ON();
+				pitidos(3);
+				estado = VACIO;
+				break;
+
+				default:
+				break;
+			}
 		}
-		
 		char total[4];
 		sprintf(total,"%04d",deposito);
 		int confirmar = 0;
